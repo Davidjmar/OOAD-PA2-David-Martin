@@ -15,7 +15,7 @@ class MeowSound(SpeakBehavior):
 
 class HuffSound(SpeakBehavior):
     def makeNoise(self):
-        print("Hufffff, *kicks dirt up with horn*")
+        print("Hufffff, *kicks dirt up foot sassily*")
 
 
 class BarkSound(SpeakBehavior):

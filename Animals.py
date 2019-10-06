@@ -1,5 +1,8 @@
 import abc
 from Action import *
+from Action.Eat import *
+from Action.Exercise import *
+from Action.Noise import *
 
 # Initalize the Animal Class
 
@@ -41,9 +44,13 @@ class Animal(object):
     def executeExercise(self):
         self.roamBehavior.roam()
 
-    def printAnimal(self):
-        print("This animal is a(n) " + self.getAnimalSpecies() + " of the " + self.getAnimalFamily()
-              + " family, and its name is " + self.getAnimalName())
+    def wake(self):
+        print(self.name + " the " + self.family + " is awake!")
+
+    def sleep(self):
+        print(self.name + " the " + self.family +
+              " reluctantly curls up and goes to bed...")
+
 ##########################
 
 # Initialize the Felines
@@ -57,7 +64,7 @@ class Feline(Animal):
         self.name = name
         self.family = None
         self.species = "Feline"
-        self.roamBehavior = ZoomiesRoam()
+        self.roamBehavior = KittyExercise()
         self.eatBehavior = Carne()
 
 
@@ -65,6 +72,7 @@ class Cat(Feline):
     def __init__(self, name):
         super().__init__(name)
         self.speakBehavior = MeowSound()
+        self.roamBehavior = KittyExercise2()
         self.family = "Cat"
 
 
@@ -135,12 +143,15 @@ class Hippo(Pachyderm):
         self.speakBehavior = HuffSound()
         self.family = "Hippo"
 
+# Below in elephant I implemented the stategy pattern to override the pachyderm's default roam behavior to a secondary
+
 
 class Elephant(Pachyderm):
     def __init__(self, name):
         __metaclass__ = abc.ABCMeta
         super().__init__(name)
         self.speakBehavior = HuffSound()
+        self.roamBehavior = StompingRoam2()
         self.family = "Elephant"
 
 
@@ -149,10 +160,6 @@ class Rhino(Pachyderm):
         __metaclass__ = abc.ABCMeta
         super().__init__(name)
         self.speakBehavior = HuffSound()
+        self.roamBehavior = StompingRoam2()
         self.family = "Rhino"
 ##########################
-
-
-class ZooKeeper():
-    animalArray = [Hippo("Harry"), Hippo("Harvy"), Rhino("Roger"), Rhino("Ronny"), Elephant("Earl"), Elephant("Edgar"), Dog("Daryl"),
-                   Dog("Dayna"), Wolf("Wesley"), Wolf("Wyatt"), Lion("Larry"), Lion("Linda"), Tiger("Tony"), Tiger("Terri"), Cat("Cathy"), Cat("Chris")]
